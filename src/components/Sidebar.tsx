@@ -58,7 +58,7 @@ const SidebarComponent = ({ isCollapsed }) => {
                 -
               </span>
             }
-            component={<Link to="/feature-1" />}
+            component={<Link to="/orders/details" />}
           >
             Detail
           </MenuItem>
@@ -70,7 +70,7 @@ const SidebarComponent = ({ isCollapsed }) => {
                 -
               </span>
             }
-            component={<Link to="/feature-1" />}
+            component={<Link to="" />}
           >
             List
           </MenuItem>
@@ -80,7 +80,7 @@ const SidebarComponent = ({ isCollapsed }) => {
                 -
               </span>
             }
-            component={<Link to="/feature-1" />}
+            component={<Link to="/food/detail" />}
           >
             Detail
           </MenuItem>
@@ -90,7 +90,7 @@ const SidebarComponent = ({ isCollapsed }) => {
                 -
               </span>
             }
-            component={<Link to="/feature-1" />}
+            component={<Link to="/" />}
           >
             Add
           </MenuItem>
@@ -100,7 +100,7 @@ const SidebarComponent = ({ isCollapsed }) => {
                 -
               </span>
             }
-            component={<Link to="/feature-1" />}
+            component={<Link to="/food/edit" />}
           >
             Edit
           </MenuItem>
