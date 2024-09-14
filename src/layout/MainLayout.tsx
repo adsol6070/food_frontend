@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Header } from "../components";
 import SidebarComponent from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
+import { theme } from "../constants/theme";
 
 const MainLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -44,7 +45,7 @@ const contentWrapperStyles = {
   flex: 1,
   padding: "20px",
   overflowY: "auto",
-  backgroundColor: "#EEEEFF",
+  backgroundColor: theme.colors.periwinkle,
 };
 
 export default MainLayout;

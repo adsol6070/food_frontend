@@ -1,5 +1,6 @@
 import { FaSearch, FaBell, FaUserCircle, FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { theme } from "../constants/theme";
 
 const Header = ({ onToggleSidebar }) => {
   return (
@@ -40,9 +41,6 @@ const Header = ({ onToggleSidebar }) => {
           </Link>
         </div>
       </header>
-
-      {/* Sidebar */}
-      {/* <SidebarComponent isCollapsed={isSidebarCollapsed} /> */}
     </>
   );
 };
@@ -53,9 +51,9 @@ const headerStyles = {
   alignItems: "center",
   justifyContent: "space-between",
   padding: "10px 20px",
-  backgroundColor: "#FCFCFC",
-  color: "#fff",
-  borderBottom: "3px solid #EEEEFF",
+  backgroundColor: theme.colors.snow,
+  color: theme.colors.white,
+  borderBottom: `3px solid ${theme.colors.periwinkle}`,
 };
 
 const headerInnerStyles = {
@@ -73,7 +71,7 @@ const logoStyle = {
   display: "flex",
   alignItems: "center",
   textDecoration: "none",
-  color: "#fff",
+  color: theme.colors.white,
 };
 
 const logoImageStyle = {
@@ -84,13 +82,13 @@ const logoImageStyle = {
 const brandNameStyle = {
   fontSize: "24px",
   fontWeight: "bold",
-  color: "#000",
+  color: theme.colors.black,
 };
 
 const searchContainer = {
   display: "flex",
   alignItems: "center",
-  backgroundColor: "#fff",
+  backgroundColor: theme.colors.white,
   borderRadius: "20px",
   padding: "5px",
 };
@@ -106,7 +104,7 @@ const searchInputStyle = {
 const searchButtonStyle = {
   backgroundColor: "#4a90e2",
   border: "none",
-  color: "#fff",
+  color: theme.colors.white,
   padding: "5px 10px",
   borderRadius: "50%",
   cursor: "pointer",
@@ -118,7 +116,7 @@ const navLinksContainer = {
 };
 
 const navIconStyle = {
-  color: "#fff",
+  color: theme.colors.white,
   fontSize: "24px",
   marginLeft: "20px",
   textDecoration: "none",

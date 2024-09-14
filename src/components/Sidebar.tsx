@@ -1,12 +1,13 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { FaTachometerAlt, FaGem, FaList, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { theme } from "../constants/theme";
 
 const SidebarComponent = ({ isCollapsed }) => {
   return (
     <Sidebar
       breakPoint="md"
-      backgroundColor="#FCFCFC"
+      backgroundColor={theme.colors.snow}
       transitionDuration={500}
       collapsed={isCollapsed}
       style={{
@@ -22,8 +23,8 @@ const SidebarComponent = ({ isCollapsed }) => {
             justifyContent: "center",
             alignItems: "center",
             ":hover": {
-              color: "#CF9D47",
-              background: "#EEEEFF",
+              color: theme.colors.copper,
+              background: theme.colors.periwinkle,
             },
           },
         }}
@@ -32,7 +33,7 @@ const SidebarComponent = ({ isCollapsed }) => {
           icon={<FaTachometerAlt />}
           component={<Link to="/dashboard" />}
           rootStyles={{
-            color: "#cf9d47",
+            color: theme.colors.copper,
           }}
         >
           Dashboard
