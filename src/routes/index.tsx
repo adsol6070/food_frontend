@@ -4,6 +4,8 @@ import { AuthLayout, MainLayout } from "../layout";
 import { Dashboard, Home, Login, NotFound, Profile, Settings } from "../pages";
 import { DetailFood, EditFood } from "../pages/food";
 import { OrderDetail } from "../pages/orders";
+import { AddFood, ListFood } from "../pages/food";
+import { OrdersList } from "../pages/orders";
 
 const AppRouter = () => {
   return (
@@ -30,6 +32,9 @@ const AppRouter = () => {
           <Route path="/food/detail" element={<DetailFood />}/>
           <Route path="/food/edit" element={<EditFood />}/>
           <Route path="/orders/details" element={<OrderDetail />}/>
+          <Route path="/food" element={<ListFood />} />
+          <Route path="/food/create" element={<AddFood />} />
+          <Route path="/orders" element={<OrdersList />} />
         </Route>
 
         {/* Catch-all for 404 */}
