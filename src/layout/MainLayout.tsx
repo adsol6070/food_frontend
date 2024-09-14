@@ -45,7 +45,7 @@ const contentWrapperStyles = {
   flex: 1,
   padding: "20px",
   overflowY: "auto",
-  backgroundColor: theme.colors.periwinkle,
+  backgroundColor: theme.colors.whiteSmoke,
 };
 
 export default MainLayout;

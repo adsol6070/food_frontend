@@ -51,9 +51,9 @@ const headerStyles = {
   alignItems: "center",
   justifyContent: "space-between",
   padding: "10px 20px",
-  backgroundColor: theme.colors.snow,
+  backgroundColor: theme.colors.almostWhite,
   color: theme.colors.white,
-  borderBottom: `3px solid ${theme.colors.periwinkle}`,
+  borderBottom: `3px solid ${theme.colors.whiteSmoke}`,
 };
 
 const headerInnerStyles = {
