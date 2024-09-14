@@ -1,5 +1,5 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { FaTachometerAlt, FaGem, FaList, FaUser } from "react-icons/fa";
+import { FaTachometerAlt, FaRegGem, FaRegUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { theme } from "../constants/theme";
 
@@ -7,7 +7,8 @@ const SidebarComponent = ({ isCollapsed }) => {
   return (
     <Sidebar
       breakPoint="md"
-      backgroundColor={theme.colors.snow}
+      backgroundColor={theme.colors.almostWhite}
+      width="282px"
       transitionDuration={500}
       collapsed={isCollapsed}
       style={{
@@ -21,36 +22,142 @@ const SidebarComponent = ({ isCollapsed }) => {
             borderRadius: "5px",
             display: "flex",
             justifyContent: "center",
+            fontSize: "15px",
             alignItems: "center",
+            ...theme.fonts.bold,
             ":hover": {
-              color: theme.colors.copper,
-              background: theme.colors.periwinkle,
+              color: theme.colors.orangeYellow,
+              background: theme.colors.whiteSmoke,
             },
           },
         }}
       >
         <MenuItem
-          icon={<FaTachometerAlt />}
+          icon={<FaTachometerAlt size="20" />}
           component={<Link to="/dashboard" />}
           rootStyles={{
-            color: theme.colors.copper,
+            color: theme.colors.orangeYellow,
           }}
         >
           Dashboard
         </MenuItem>
-        <SubMenu label={"Features"} icon={<FaGem />}>
-          <MenuItem icon={<FaList />} component={<Link to="/feature-1" />}>
-            Feature 1
+        <SubMenu label={"Orders"} icon={<FaRegGem size="20" />}>
+          <MenuItem
+            icon={
+              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+                -
+              </span>
+            }
+            component={<Link to="/feature-1" />}
+          >
+            List
+          </MenuItem>
+          <MenuItem
+            icon={
+              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+                -
+              </span>
+            }
+            component={<Link to="/feature-1" />}
+          >
+            Detail
           </MenuItem>
         </SubMenu>
-        <MenuItem icon={<FaUser />} component={<Link to="/profile" />}>
-          Profile
+        <SubMenu label={"Foods"} icon={<FaRegGem size="20" />}>
+          <MenuItem
+            icon={
+              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+                -
+              </span>
+            }
+            component={<Link to="/feature-1" />}
+          >
+            List
+          </MenuItem>
+          <MenuItem
+            icon={
+              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+                -
+              </span>
+            }
+            component={<Link to="/feature-1" />}
+          >
+            Detail
+          </MenuItem>
+          <MenuItem
+            icon={
+              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+                -
+              </span>
+            }
+            component={<Link to="/feature-1" />}
+          >
+            Add
+          </MenuItem>
+          <MenuItem
+            icon={
+              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+                -
+              </span>
+            }
+            component={<Link to="/feature-1" />}
+          >
+            Edit
+          </MenuItem>
+        </SubMenu>
+        <SubMenu label={"Customer"} icon={<FaRegGem size="20" />}>
+          <MenuItem
+            icon={
+              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+                -
+              </span>
+            }
+            component={<Link to="/feature-1" />}
+          >
+            List
+          </MenuItem>
+          <MenuItem
+            icon={
+              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+                -
+              </span>
+            }
+            component={<Link to="/feature-1" />}
+          >
+            Detail
+          </MenuItem>
+          <MenuItem
+            icon={
+              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+                -
+              </span>
+            }
+            component={<Link to="/feature-1" />}
+          >
+            Add
+          </MenuItem>
+          <MenuItem
+            icon={
+              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+                -
+              </span>
+            }
+            component={<Link to="/feature-1" />}
+          >
+            Edit
+          </MenuItem>
+        </SubMenu>
+        <MenuItem
+          icon={<FaRegUser size="20" />}
+          component={<Link to="/profile" />}
+        >
+          Wallet
         </MenuItem>
-        <MenuItem icon={<FaUser />} component={<Link to="/settings" />}>
-          Settings
-        </MenuItem>
-        <MenuItem icon={<FaUser />} component={<Link to="/logout" />}>
-          Logout
+        <MenuItem
+          icon={<FaRegUser size="20" />}
+          component={<Link to="/settings" />}
+        >
+          Setting
         </MenuItem>
       </Menu>
     </Sidebar>
