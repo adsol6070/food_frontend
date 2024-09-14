@@ -53,9 +53,9 @@ const headerStyles = {
   alignItems: "center",
   justifyContent: "space-between",
   padding: "10px 20px",
-  backgroundColor: "#4a90e2",
+  backgroundColor: "#FCFCFC",
   color: "#fff",
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  borderBottom: "3px solid #EEEEFF",
 };
 
 const headerInnerStyles = {
@@ -84,6 +84,7 @@ const logoImageStyle = {
 const brandNameStyle = {
   fontSize: "24px",
   fontWeight: "bold",
+  color: "#000",
 };
 
 const searchContainer = {
@@ -127,7 +128,7 @@ const navIconStyle = {
 const hamburgerButtonStyles = {
   background: "none",
   border: "none",
-  color: "#fff",
+  color: "#000",
   fontSize: "24px",
   cursor: "pointer",
 };

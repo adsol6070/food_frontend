@@ -6,14 +6,34 @@ const SidebarComponent = ({ isCollapsed }) => {
   return (
     <Sidebar
       breakPoint="md"
-      backgroundColor="red"
+      backgroundColor="#FCFCFC"
       transitionDuration={500}
       collapsed={isCollapsed}
+      style={{
+        paddingTop: "20px",
+      }}
     >
-      <Menu>
+      <Menu
+        menuItemStyles={{
+          button: {
+            margin: "0px 10px",
+            borderRadius: "5px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            ":hover": {
+              color: "#CF9D47",
+              background: "#EEEEFF",
+            },
+          },
+        }}
+      >
         <MenuItem
           icon={<FaTachometerAlt />}
           component={<Link to="/dashboard" />}
+          rootStyles={{
+            color: "#cf9d47",
+          }}
         >
           Dashboard
         </MenuItem>

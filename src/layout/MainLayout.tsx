@@ -37,13 +37,14 @@ const mainLayoutStyles = {
 const layoutBodyStyles = {
   display: "flex",
   flex: 1,
-  overflow: "hidden", // Ensures that both sidebar and content respect screen height
+  overflow: "hidden",
 };
 
 const contentWrapperStyles = {
   flex: 1,
   padding: "20px",
-  overflowY: "auto", // Allows content to scroll if it's longer than the view height
+  overflowY: "auto",
+  backgroundColor: "#EEEEFF",
 };
 
 export default MainLayout;
