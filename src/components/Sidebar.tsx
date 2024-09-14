@@ -44,17 +44,21 @@ const SidebarComponent = ({ isCollapsed }) => {
         <SubMenu label={"Orders"} icon={<FaRegGem size="20" />}>
           <MenuItem
             icon={
-              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
                 -
               </span>
             }
-            component={<Link to="/feature-1" />}
+            component={<Link to="/orders" />}
           >
             List
           </MenuItem>
           <MenuItem
             icon={
-              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
                 -
               </span>
             }
@@ -66,17 +70,21 @@ const SidebarComponent = ({ isCollapsed }) => {
         <SubMenu label={"Foods"} icon={<FaRegGem size="20" />}>
           <MenuItem
             icon={
-              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
                 -
               </span>
             }
-            component={<Link to="/feature-1" />}
+            component={<Link to="/food" />}
           >
             List
           </MenuItem>
           <MenuItem
             icon={
-              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
                 -
               </span>
             }
@@ -86,17 +94,21 @@ const SidebarComponent = ({ isCollapsed }) => {
           </MenuItem>
           <MenuItem
             icon={
-              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
                 -
               </span>
             }
-            component={<Link to="/feature-1" />}
+            component={<Link to="/food/create" />}
           >
             Add
           </MenuItem>
           <MenuItem
             icon={
-              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
                 -
               </span>
             }
@@ -108,7 +120,9 @@ const SidebarComponent = ({ isCollapsed }) => {
         <SubMenu label={"Customer"} icon={<FaRegGem size="20" />}>
           <MenuItem
             icon={
-              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
                 -
               </span>
             }
@@ -118,7 +132,9 @@ const SidebarComponent = ({ isCollapsed }) => {
           </MenuItem>
           <MenuItem
             icon={
-              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
                 -
               </span>
             }
@@ -128,7 +144,9 @@ const SidebarComponent = ({ isCollapsed }) => {
           </MenuItem>
           <MenuItem
             icon={
-              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
                 -
               </span>
             }
@@ -138,7 +156,9 @@ const SidebarComponent = ({ isCollapsed }) => {
           </MenuItem>
           <MenuItem
             icon={
-              <span style={{ fontSize: "16px", color: theme.colors.orangeYellow }}>
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
                 -
               </span>
             }
