@@ -1,7 +1,10 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { FaTachometerAlt, FaRegGem, FaRegUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { theme } from "../constants/theme";
+import { FiHome } from "react-icons/fi";
+import { GoPeople } from "react-icons/go";
+import { LuSettings, LuWallet2 } from "react-icons/lu";
+import { MdOutlineFastfood, MdOutlineFormatListNumbered } from "react-icons/md";
 
 const SidebarComponent = ({ isCollapsed }) => {
   return (
@@ -11,11 +14,47 @@ const SidebarComponent = ({ isCollapsed }) => {
       width="282px"
       transitionDuration={500}
       collapsed={isCollapsed}
-      style={{
-        paddingTop: "20px",
-      }}
+      toggled={true}
+      onBackdropClick={() => console.log("Clicked")}
     >
+      {/* Company Logo and Name Section */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: isCollapsed ? "center" : "flex-start",
+          padding: "0 20px",
+          marginBottom: "20px",
+          borderBottom: `1px solid ${theme.colors.whiteSmoke}`,
+          height: "69px", // Ensures enough height for vertical centering
+        }}
+      >
+        <img
+          src={""}
+          alt="logo"
+          style={{
+            height: "40px",
+            width: "40px",
+            marginRight: isCollapsed ? "0" : "20px",
+            transition: "margin-right 0.3s",
+            objectFit: "contain",
+          }}
+        />
+        {!isCollapsed && (
+          <h2
+            style={{
+              ...theme.fonts.bold,
+              margin: 0,
+              lineHeight: "1.2",
+            }}
+          >
+            Adsol
+          </h2>
+        )}
+      </div>
+
       <Menu
+        closeOnClick={true}
         menuItemStyles={{
           button: {
             margin: "0px 10px",
@@ -33,7 +72,7 @@ const SidebarComponent = ({ isCollapsed }) => {
         }}
       >
         <MenuItem
-          icon={<FaTachometerAlt size="20" />}
+          icon={<FiHome size="22" />}
           component={<Link to="/dashboard" />}
           rootStyles={{
             color: theme.colors.orangeYellow,
@@ -41,7 +80,10 @@ const SidebarComponent = ({ isCollapsed }) => {
         >
           Dashboard
         </MenuItem>
-        <SubMenu label={"Orders"} icon={<FaRegGem size="20" />}>
+        <SubMenu
+          label={"Orders"}
+          icon={<MdOutlineFormatListNumbered size="22" />}
+        >
           <MenuItem
             icon={
               <span
@@ -67,7 +109,7 @@ const SidebarComponent = ({ isCollapsed }) => {
             Detail
           </MenuItem>
         </SubMenu>
-        <SubMenu label={"Foods"} icon={<FaRegGem size="20" />}>
+        <SubMenu label={"Foods"} icon={<MdOutlineFastfood size="22" />}>
           <MenuItem
             icon={
               <span
@@ -117,7 +159,7 @@ const SidebarComponent = ({ isCollapsed }) => {
             Edit
           </MenuItem>
         </SubMenu>
-        <SubMenu label={"Customer"} icon={<FaRegGem size="20" />}>
+        <SubMenu label={"Customer"} icon={<GoPeople size="22" />}>
           <MenuItem
             icon={
               <span
@@ -168,13 +210,13 @@ const SidebarComponent = ({ isCollapsed }) => {
           </MenuItem>
         </SubMenu>
         <MenuItem
-          icon={<FaRegUser size="20" />}
+          icon={<LuWallet2 size="22" />}
           component={<Link to="/profile" />}
         >
           Wallet
         </MenuItem>
         <MenuItem
-          icon={<FaRegUser size="20" />}
+          icon={<LuSettings size="22" />}
           component={<Link to="/settings" />}
         >
           Setting
