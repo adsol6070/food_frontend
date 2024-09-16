@@ -5,6 +5,8 @@ export const theme = {
     orangeYellow: "#ffad1e",
     black: "#000000",
     white: "#FFFFFF",
+    lightPink :"#f3bac0",
+    terraCotta :"#e35f6c",
   },
   fonts: {
     regular: {
