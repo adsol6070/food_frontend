@@ -14,12 +14,12 @@ const MainLayout = () => {
   return (
     <div className="main-layout" style={mainLayoutStyles}>
       {/* Full-width Header */}
-      <Header onToggleSidebar={toggleSidebar} />
 
+      <SidebarComponent isCollapsed={!isSidebarOpen} />
       {/* Sidebar and Main Content */}
       <div className="layout-body" style={layoutBodyStyles}>
+        <Header onToggleSidebar={toggleSidebar} />
         {/* Always render SidebarComponent and pass the correct prop */}
-        <SidebarComponent isCollapsed={!isSidebarOpen} />
         <div className="content-wrapper" style={contentWrapperStyles}>
           <Outlet />
         </div>
@@ -31,13 +31,14 @@ const MainLayout = () => {
 // Styling objects
 const mainLayoutStyles = {
   display: "flex",
-  flexDirection: "column",
+  // flexDirection: "column",
   height: "100vh",
 };
 
 const layoutBodyStyles = {
   display: "flex",
   flex: 1,
+  flexDirection: "column",
   overflow: "hidden",
 };
 

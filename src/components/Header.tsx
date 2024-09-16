@@ -1,6 +1,7 @@
 import { FaSearch, FaBell, FaUserCircle, FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { theme } from "../constants/theme";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const Header = ({ onToggleSidebar }) => {
   return (
@@ -11,25 +12,17 @@ const Header = ({ onToggleSidebar }) => {
         <div style={headerInnerStyles}>
           {/* Hamburger Menu */}
           <button style={hamburgerButtonStyles} onClick={onToggleSidebar}>
-            <FaBars />
+            <RxHamburgerMenu />
           </button>
-
-          {/* Logo Section */}
-          <div style={logoContainer}>
-            <Link to="/" style={logoStyle}>
-              <img src="/logo.png" alt="Logo" style={logoImageStyle} />
-              <span style={brandNameStyle}>MyApp</span>
-            </Link>
+          <div style={searchContainer}>
+            <button style={searchButtonStyle}>
+              <FaSearch />
+            </button>
+            <input type="text" placeholder="search" style={searchInputStyle} />
           </div>
         </div>
 
         {/* Search Bar */}
-        <div style={searchContainer}>
-          <input type="text" placeholder="Search..." style={searchInputStyle} />
-          <button style={searchButtonStyle}>
-            <FaSearch />
-          </button>
-        </div>
 
         {/* Nav Links and User Actions */}
         <div style={navLinksContainer}>
@@ -50,7 +43,8 @@ const headerStyles = {
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "10px 20px",
+  padding: "0px 20px",
+  height: "69px",
   backgroundColor: theme.colors.almostWhite,
   color: theme.colors.white,
   borderBottom: `3px solid ${theme.colors.whiteSmoke}`,
@@ -59,38 +53,18 @@ const headerStyles = {
 const headerInnerStyles = {
   display: "flex",
   alignItems: "center",
-};
-
-const logoContainer = {
-  display: "flex",
-  alignItems: "center",
-  marginLeft: "10px",
-};
-
-const logoStyle = {
-  display: "flex",
-  alignItems: "center",
-  textDecoration: "none",
-  color: theme.colors.white,
-};
-
-const logoImageStyle = {
-  height: "40px",
-  marginRight: "10px",
-};
-
-const brandNameStyle = {
-  fontSize: "24px",
-  fontWeight: "bold",
-  color: theme.colors.black,
+  justifyContent: "center",
+  gap: "20px",
 };
 
 const searchContainer = {
   display: "flex",
   alignItems: "center",
+  justifyContent: "center",
   backgroundColor: theme.colors.white,
-  borderRadius: "20px",
-  padding: "5px",
+  borderRadius: "30px",
+  border: "1px solid #afadab",
+  padding: "2px",
 };
 
 const searchInputStyle = {
@@ -102,12 +76,11 @@ const searchInputStyle = {
 };
 
 const searchButtonStyle = {
-  backgroundColor: "#4a90e2",
+  background: "transparent",
   border: "none",
-  color: theme.colors.white,
-  padding: "5px 10px",
-  borderRadius: "50%",
+  color: "#afadab",
   cursor: "pointer",
+  textAlign: "center",
 };
 
 const navLinksContainer = {
