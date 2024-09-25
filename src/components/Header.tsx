@@ -1,107 +1,165 @@
-import { FaSearch, FaBell, FaUserCircle, FaBars } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { theme } from "../constants/theme";
+import { useState } from "react";
+import { FaSearch, FaRegUserCircle } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
+import styled from "styled-components";
+import { theme } from "../constants/theme";
+import { useAuthContext } from "../common/context/AuthContext";
 
 const Header = ({ onToggleSidebar }) => {
+  const { logoutUser } = useAuthContext();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
-    <>
-      {/* Header */}
-      <header style={headerStyles}>
-        {/* Header Container */}
-        <div style={headerInnerStyles}>
-          {/* Hamburger Menu */}
-          <button style={hamburgerButtonStyles} onClick={onToggleSidebar}>
-            <RxHamburgerMenu />
-          </button>
-          <div style={searchContainer}>
-            <button style={searchButtonStyle}>
-              <FaSearch />
-            </button>
-            <input type="text" placeholder="search" style={searchInputStyle} />
-          </div>
-        </div>
-
-        {/* Search Bar */}
-
-        {/* Nav Links and User Actions */}
-        <div style={navLinksContainer}>
-          <Link to="/notifications" style={navIconStyle}>
-            <FaBell />
-          </Link>
-          <Link to="/profile" style={navIconStyle}>
-            <FaUserCircle />
-          </Link>
-        </div>
-      </header>
-    </>
+    <HeaderContainer>
+      <LeftContainer>
+        <HamburgerButton onClick={onToggleSidebar}>
+          <RxHamburgerMenu />
+        </HamburgerButton>
+        <SearchContainer>
+          <SearchButton>
+            <FaSearch />
+          </SearchButton>
+          <SearchInput type="text" placeholder="search" />
+        </SearchContainer>
+      </LeftContainer>
+      <ProfileContainer>
+        <ProfileButton onClick={handleDropdownToggle}>
+          <FaRegUserCircle color={theme.colors.black} size={24} />
+        </ProfileButton>
+        {isDropdownOpen && (
+          <DropdownMenu>
+            <DropdownItem href="/profile">View Profile</DropdownItem>
+            <DropdownItem onClick={() => logoutUser()}>Logout</DropdownItem>
+          </DropdownMenu>
+        )}
+      </ProfileContainer>
+    </HeaderContainer>
   );
 };
 
-// Inline styles for simplicity (you can also use CSS modules or external stylesheet)
-const headerStyles = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  padding: "0px 20px",
-  height: "69px",
-  backgroundColor: theme.colors.almostWhite,
-  color: theme.colors.white,
-  borderBottom: `3px solid ${theme.colors.whiteSmoke}`,
-};
+// Styled components
 
-const headerInnerStyles = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "20px",
-};
+const HeaderContainer = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px;
+  height: 69px;
+  background-color: ${theme.colors.almostWhite};
+  border-bottom: 3px solid ${theme.colors.whiteSmoke};
+  flex-wrap: nowrap;
 
-const searchContainer = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: theme.colors.white,
-  borderRadius: "30px",
-  border: "1px solid #afadab",
-  padding: "2px",
-};
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+`;
 
-const searchInputStyle = {
-  border: "none",
-  padding: "5px 10px",
-  borderRadius: "20px",
-  outline: "none",
-  flex: 1,
-};
+const LeftContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Small gap between hamburger and search */
+`;
 
-const searchButtonStyle = {
-  background: "transparent",
-  border: "none",
-  color: "#afadab",
-  cursor: "pointer",
-  textAlign: "center",
-};
+const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: ${theme.colors.white};
+  border-radius: 30px;
+  border: 1px solid #afadab;
+  padding: 2px;
 
-const navLinksContainer = {
-  display: "flex",
-  alignItems: "center",
-};
+  /* Added max-width for larger screens */
+  max-width: 400px; /* Adjust this value as needed */
+  flex: 1; /* Allow it to grow */
 
-const navIconStyle = {
-  color: theme.colors.white,
-  fontSize: "24px",
-  marginLeft: "20px",
-  textDecoration: "none",
-  cursor: "pointer",
-};
+  @media (max-width: 768px) {
+    width: 100%; /* Full width on smaller screens */
+    grid-column: 2; /* Place it in the center grid column */
+    justify-self: center; /* Center it in the grid */
+  }
+`;
 
-const hamburgerButtonStyles = {
-  background: "none",
-  border: "none",
-  color: "#000",
-  fontSize: "24px",
-  cursor: "pointer",
-};
+const SearchInput = styled.input`
+  border: none;
+  padding: 5px 10px;
+  border-radius: 20px;
+  outline: none;
+  flex: 1;
+`;
+
+const SearchButton = styled.button`
+  background: transparent;
+  border: none;
+  color: #afadab;
+  cursor: pointer;
+  text-align: center;
+`;
+
+const ProfileContainer = styled.div`
+  position: relative; /* Necessary for positioning the dropdown menu */
+
+  @media (max-width: 768px) {
+    grid-column: 3; /* Place it in the right grid column */
+    justify-self: end; /* Align to the right in the grid */
+  }
+`;
+
+const ProfileButton = styled.button`
+  background: none;
+  border: none;
+  color: ${theme.colors.black};
+  cursor: pointer;
+`;
+
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: ${theme.colors.white};
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  z-index: 1000;
+`;
+
+const DropdownItem = styled.a`
+  display: block;
+  padding: 8px 16px;
+  color: ${theme.colors.black};
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${theme.colors.lightGray};
+  }
+`;
+
+const HamburgerButton = styled.button`
+  background: none;
+  border: none;
+  color: ${theme.colors.black};
+  font-size: 24px;
+  cursor: pointer;
+`;
 
 export default Header;
+
+// const ProfileLink = styled(Link)`
+//   color: ${theme.colors.white};
+//   font-size: 24px;
+//   margin-left: 20px;
+//   text-decoration: none;
+//   cursor: pointer;
+
+//   @media (max-width: 768px) {
+//     grid-column: 3; /* Place it in the right grid column */
+//     justify-self: end; /* Align to the right in the grid */
+//   }
+// `;

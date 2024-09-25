@@ -1,52 +1,58 @@
 import { useState } from "react";
+import styled from "styled-components"; // Import styled-components
 import { Header } from "../components";
 import SidebarComponent from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
 import { theme } from "../constants/theme";
 
 const MainLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState<boolean | null>(true);
+  const [isToggled, setIsToggled] = useState<boolean | null>(true);
 
   const toggleSidebar = () => {
-    setIsSidebarOpen((prevState) => !prevState);
+    if (window.innerWidth > 768) {
+      setIsCollapsed((prevState) => !prevState);
+      setIsToggled(null);
+    } else {
+      setIsToggled((prevState) => !prevState);
+      setIsCollapsed(null);
+    }
   };
 
   return (
-    <div className="main-layout" style={mainLayoutStyles}>
-      {/* Full-width Header */}
-
-      <SidebarComponent isCollapsed={!isSidebarOpen} />
-      {/* Sidebar and Main Content */}
-      <div className="layout-body" style={layoutBodyStyles}>
+    <MainContainer>
+      <SidebarComponent
+        isCollapsed={isCollapsed}
+        isToggled={isToggled}
+        setIsToggled={setIsToggled}
+      />
+      <LayoutBody>
         <Header onToggleSidebar={toggleSidebar} />
-        {/* Always render SidebarComponent and pass the correct prop */}
-        <div className="content-wrapper" style={contentWrapperStyles}>
+        <ContentWrapper>
           <Outlet />
-        </div>
-      </div>
-    </div>
+        </ContentWrapper>
+      </LayoutBody>
+    </MainContainer>
   );
 };
 
-// Styling objects
-const mainLayoutStyles = {
-  display: "flex",
-  // flexDirection: "column",
-  height: "100vh",
-};
+const MainContainer = styled.div`
+  display: flex;
+  height: 100vh;
+`;
 
-const layoutBodyStyles = {
-  display: "flex",
-  flex: 1,
-  flexDirection: "column",
-  overflow: "hidden",
-};
+const LayoutBody = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+`;
 
-const contentWrapperStyles = {
-  flex: 1,
-  padding: "20px",
-  overflowY: "auto",
-  backgroundColor: theme.colors.whiteSmoke,
-};
+const ContentWrapper = styled.div`
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: ${theme.colors.whiteSmoke};
+`;
 
 export default MainLayout;

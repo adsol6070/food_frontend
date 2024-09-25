@@ -1,218 +1,112 @@
 import { useMemo } from "react";
-import { useTable } from "react-table";
-import "./Table.css"; // Assuming custom styling
-import { Button, Card, Col, Row } from "react-bootstrap";
+import "./Table.css";
+import { Col, Row } from "react-bootstrap";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
-import { BsPlus } from "react-icons/bs";
-import { theme } from "../../constants/theme";
+import { BsTrash } from "react-icons/bs";
+import useAddMenu from "./useFood";
+import styled from "styled-components";
+import { FaEye } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import Table from "../../components/Table";
 
 const List = () => {
-  const data = useMemo(
-    () => [
-      {
-        product: "Donnell",
-        sku: "SKU-4223",
-        price: 931,
-        rating: 8,
-        status: "Pending",
-      },
-      {
-        product: "Gothart",
-        sku: "SKU-9040",
-        price: 830,
-        rating: 5.5,
-        status: "Draft",
-      },
-      {
-        product: "Emlynn",
-        sku: "SKU-8795",
-        price: 944,
-        rating: 4,
-        status: "Publish",
-      },
-      {
-        product: "Adams",
-        sku: "SKU-7924",
-        price: 480,
-        rating: 3.3,
-        status: "Publish",
-      },
-      {
-        product: "Myrwyn",
-        sku: "SKU-2510",
-        price: 496,
-        rating: 5.7,
-        status: "Pending",
-      },
-      {
-        product: "Blanca",
-        sku: "SKU-3849",
-        price: 258,
-        rating: 5.5,
-        status: "Draft",
-      },
-      {
-        product: "Chlo",
-        sku: "SKU-2868",
-        price: 540,
-        rating: 0.1,
-        status: "Pending",
-      },
-      {
-        product: "Diannne",
-        sku: "SKU-8742",
-        price: 746,
-        rating: 6.3,
-        status: "Publish",
-      },
-      {
-        product: "Ludvig",
-        sku: "SKU-1846",
-        price: 415,
-        rating: 1.1,
-        status: "Publish",
-      },
-      {
-        product: "Ruperta",
-        sku: "SKU-2037",
-        price: 640,
-        rating: 6.2,
-        status: "Pending",
-      },
-    ],
-    []
-  );
+  const { menuItems, loading, error, deleteMenuItem } = useAddMenu();
+
+  const navigate = useNavigate();
 
   const columns = useMemo(
     () => [
       {
-        Header: "Product",
-        accessor: "product",
+        Header: "Image",
+        accessor: "imageUrl",
         Cell: ({ value }) => (
           <div className="product-cell">
-            <img
-              src={`https://via.placeholder.com/50`}
-              alt={value}
-              className="product-image"
-            />
-            {value}
+            <img src={value} alt={value} className="product-image" />
           </div>
         ),
       },
       {
-        Header: "SKU",
-        accessor: "sku",
+        Header: "Name",
+        accessor: "name",
+        Cell: ({ value }) => <div className="product-cell">{value}</div>,
+      },
+      {
+        Header: "Menu Id",
+        accessor: "_id",
       },
       {
         Header: "Price",
         accessor: "price",
-        Cell: ({ value }) => `$${value.toFixed(2)}`,
-      },
-      {
-        Header: "Rating",
-        accessor: "rating",
-        Cell: ({ value }) => <span className="rating">⭐ {value}</span>,
+        Cell: ({ value }) => `$${parseFloat(value).toFixed(2)}`,
       },
       {
         Header: "Status",
-        accessor: "status",
+        accessor: "availability",
         Cell: ({ value }) => {
           const statusClasses = {
-            Pending: "status-pending",
-            Draft: "status-draft",
-            Publish: "status-publish",
+            true: "status-publish",
+            false: "status-pending",
           };
           return (
-            <span className={`status ${statusClasses[value]}`}>{value}</span>
+            <span className={`status ${statusClasses[value]}`}>
+              {value === "true" ? "Available" : "Out of Stock"}
+            </span>
           );
         },
       },
       {
         Header: "Action",
-        Cell: () => (
-          <div className="action-buttons">
-            <button className="edit-btn">✏️</button>
-            <button className="view-btn">👁️</button>
-          </div>
-        ),
+        accessor: "action",
+        Cell: ({ cell }) => {
+          const productId = cell.row.original._id;
+          return (
+            <div className="action-buttons">
+              <button
+                className="edit-btn"
+                onClick={() => {
+                  navigate(`/food/edit/${productId}`);
+                }}
+              >
+                ✏️
+              </button>
+              <Delete>
+                <BsTrash
+                  size="20"
+                  onClick={() => {
+                    deleteMenuItem(productId);
+                  }}
+                />
+              </Delete>
+              <View>
+                <FaEye
+                  size="20"
+                  onClick={() => {
+                    navigate(`/food/detail/${productId}`);
+                  }}
+                />
+              </View>
+            </div>
+          );
+        },
       },
     ],
     []
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({
-      columns,
-      data,
-    });
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error loading data: {error}</p>;
+  }
 
   return (
     <>
-      <PageBreadcrumb title="Food List" subName="Foods" />
+      <PageBreadcrumb title="Menu List" subName="Menu" />
       <Row>
         <Col xs={12}>
-          <Card
-            style={{
-              border: "none",
-              background: theme.colors.almostWhite,
-              padding: "10px",
-            }}
-          >
-            <Card.Header
-              style={{ border: "none", background: theme.colors.almostWhite }}
-            >
-              <div className="d-flex justify-content-between align-items-center">
-                <h4 className="header-title">Food List</h4>
-                <Button
-                  style={{
-                    backgroundColor: theme.colors.orangeYellow,
-                    border: "none",
-                    borderRadius: "4px",
-                    padding: "5px 10px",
-                    fontSize: "17px",
-                    textAlign: "center",
-                  }}
-                >
-                  <BsPlus size="30" /> Add New Food
-                </Button>
-              </div>
-            </Card.Header>
-            <Card.Body
-              style={{
-                border: "none",
-                background: theme.colors.almostWhite,
-                padding: "10px",
-              }}
-            >
-              <table {...getTableProps()} className="product-table">
-                <thead>
-                  {headerGroups.map((headerGroup) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
-                      {headerGroup.headers.map((column) => (
-                        <th {...column.getHeaderProps()}>
-                          {column.render("Header")}
-                        </th>
-                      ))}
-                    </tr>
-                  ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                  {rows.map((row) => {
-                    prepareRow(row);
-                    return (
-                      <tr {...row.getRowProps()}>
-                        {row.cells.map((cell) => (
-                          <td {...cell.getCellProps()}>
-                            {cell.render("Cell")}
-                          </td>
-                        ))}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </Card.Body>
-          </Card>
+          <Table columns={columns} data={menuItems} title="Food List" />
         </Col>
       </Row>
     </>
@@ -220,3 +114,29 @@ const List = () => {
 };
 
 export default List;
+
+const Delete = styled.div`
+  background: transparent;
+  cursor: pointer;
+`;
+
+const View = styled.div`
+  background: transparent;
+  cursor: pointer;
+`;
+
+/* 
+ <Button
+  style={{
+    backgroundColor: theme.colors.orangeYellow,
+    border: "none",
+    borderRadius: "4px",
+    padding: "5px 10px",
+    fontSize: "17px",
+    textAlign: "center",
+  }}
+  >
+    <BsPlus size="30" /> Add New Food
+  </Button>
+
+*/

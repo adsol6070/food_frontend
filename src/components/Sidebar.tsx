@@ -3,10 +3,20 @@ import { Link } from "react-router-dom";
 import { theme } from "../constants/theme";
 import { FiHome } from "react-icons/fi";
 import { GoPeople } from "react-icons/go";
-import { LuSettings, LuWallet2 } from "react-icons/lu";
-import { MdOutlineFastfood, MdOutlineFormatListNumbered } from "react-icons/md";
+import {
+  MdOutlineFastfood,
+  MdOutlineFormatListNumbered,
+  MdSecurity,
+} from "react-icons/md";
+import Logo from "../assets/images/logo-dark (1).png";
+import { CiBarcode } from "react-icons/ci";
+import { LiaTableSolid } from "react-icons/lia";
+import { RiRestaurant2Line } from "react-icons/ri";
+import { usePermissions } from "../common/context/PermissionContext";
 
-const SidebarComponent = ({ isCollapsed }) => {
+const SidebarComponent = ({ isCollapsed, isToggled, setIsToggled }) => {
+  const { permissions } = usePermissions();
+
   return (
     <Sidebar
       breakPoint="md"
@@ -14,10 +24,9 @@ const SidebarComponent = ({ isCollapsed }) => {
       width="282px"
       transitionDuration={500}
       collapsed={isCollapsed}
-      toggled={true}
-      onBackdropClick={() => console.log("Clicked")}
+      toggled={isToggled}
+      onBackdropClick={() => setIsToggled((prevState) => !prevState)}
     >
-      {/* Company Logo and Name Section */}
       <div
         style={{
           display: "flex",
@@ -26,11 +35,11 @@ const SidebarComponent = ({ isCollapsed }) => {
           padding: "0 20px",
           marginBottom: "20px",
           borderBottom: `1px solid ${theme.colors.whiteSmoke}`,
-          height: "69px", // Ensures enough height for vertical centering
+          height: "69px",
         }}
       >
         <img
-          src={""}
+          src={Logo}
           alt="logo"
           style={{
             height: "40px",
@@ -96,18 +105,6 @@ const SidebarComponent = ({ isCollapsed }) => {
           >
             List
           </MenuItem>
-          <MenuItem
-            icon={
-              <span
-                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
-              >
-                -
-              </span>
-            }
-            component={<Link to="/orders/details" />}
-          >
-            Detail
-          </MenuItem>
         </SubMenu>
         <SubMenu label={"Foods"} icon={<MdOutlineFastfood size="22" />}>
           <MenuItem
@@ -130,18 +127,6 @@ const SidebarComponent = ({ isCollapsed }) => {
                 -
               </span>
             }
-            component={<Link to="/food/detail" />}
-          >
-            Detail
-          </MenuItem>
-          <MenuItem
-            icon={
-              <span
-                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
-              >
-                -
-              </span>
-            }
             component={<Link to="/food/create" />}
           >
             Add
@@ -154,11 +139,73 @@ const SidebarComponent = ({ isCollapsed }) => {
                 -
               </span>
             }
-            component={<Link to="/food/edit" />}
+            component={<Link to="/food/createCategory" />}
           >
-            Edit
+            Add Category
           </MenuItem>
         </SubMenu>
+
+        <SubMenu
+          label={"Clients"}
+          icon={<MdOutlineFormatListNumbered size="22" />}
+        >
+          <MenuItem
+            icon={
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
+                -
+              </span>
+            }
+            component={<Link to="/client/menu" />}
+          >
+            Menu List
+          </MenuItem>
+          <MenuItem
+            icon={
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
+                -
+              </span>
+            }
+            component={<Link to="/client/orders" />}
+          >
+            Orders
+          </MenuItem>
+          <MenuItem
+            icon={
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
+                -
+              </span>
+            }
+            component={<Link to="/client/cart" />}
+          >
+            Cart
+          </MenuItem>
+        </SubMenu>
+
+        <MenuItem
+          icon={<MdSecurity size="22" />}
+          component={<Link to="/permissions" />}
+        >
+          Permissions
+        </MenuItem>
+        <MenuItem
+          icon={<CiBarcode size="22" />}
+          component={<Link to="/client/barcodes" />}
+        >
+          Barcodes
+        </MenuItem>
+        <MenuItem
+          icon={<LiaTableSolid size="22" />}
+          component={<Link to="/client/tables" />}
+        >
+          Tables
+        </MenuItem>
+
         <SubMenu label={"Customer"} icon={<GoPeople size="22" />}>
           <MenuItem
             icon={
@@ -209,18 +256,33 @@ const SidebarComponent = ({ isCollapsed }) => {
             Edit
           </MenuItem>
         </SubMenu>
-        <MenuItem
-          icon={<LuWallet2 size="22" />}
-          component={<Link to="/profile" />}
-        >
-          Wallet
-        </MenuItem>
-        <MenuItem
-          icon={<LuSettings size="22" />}
-          component={<Link to="/settings" />}
-        >
-          Setting
-        </MenuItem>
+
+        <SubMenu label={"Restaurant"} icon={<RiRestaurant2Line size="22" />}>
+          <MenuItem
+            icon={
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
+                -
+              </span>
+            }
+            component={<Link to="/tenants" />}
+          >
+            All Restaurant
+          </MenuItem>
+          <MenuItem
+            icon={
+              <span
+                style={{ fontSize: "16px", color: theme.colors.orangeYellow }}
+              >
+                -
+              </span>
+            }
+            component={<Link to="/managers" />}
+          >
+            All Managers
+          </MenuItem>
+        </SubMenu>
       </Menu>
     </Sidebar>
   );

@@ -14,7 +14,7 @@ const PageBreadcrumb = ({ subName, title, addedChild }: PageTitleProps) => {
   return (
     <>
       <Helmet>
-        <title>{title} | Adsol CRM</title>
+        <title>{title} | Adsol</title>
       </Helmet>
       {subName && (
         <Row>

@@ -4,7 +4,6 @@ import { Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import PageBreadcrumb from "../../components/PageBreadcrumb";
 import { FaEye } from "react-icons/fa";
-import { orderApi } from "../../common";
 import styled from "styled-components";
 import Table from "../../components/Table";
 
@@ -77,9 +76,8 @@ const OrderList = () => {
   const fetchOrderItems = async () => {
     setLoading(true);
     try {
-      const response = await orderApi.getAllOrders();
-      console.log("Response from getAllOrders:", response);
-      setOrderItems(response.data);
+      // const response = await tenantApi.getallTenant();
+      // setOrderItems(response.data);
     } catch (err) {
       console.error("Error fetching order items:", err);
     } finally {
@@ -95,10 +93,10 @@ const OrderList = () => {
 
   return (
     <>
-      <PageBreadcrumb title="Order List" subName="Orders" />
+      <PageBreadcrumb title="Tenant List" subName="Tenants" />
       <Row>
         <Col xs={12}>
-          <Table columns={columns} data={orderItems} title="Order List" />
+          <Table columns={columns} data={orderItems} title="Tenants List" />
         </Col>
       </Row>
     </>
